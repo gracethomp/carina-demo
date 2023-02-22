@@ -25,6 +25,9 @@ import com.qaprosoft.carina.demo.gui.pages.CompareModelsPage;
 import com.qaprosoft.carina.demo.gui.pages.HomePage;
 import com.qaprosoft.carina.demo.gui.pages.NewsPage;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class FooterMenu extends AbstractUIObject {
     @FindBy(linkText = "Home")
     private ExtendedWebElement homeLink;
@@ -34,6 +37,9 @@ public class FooterMenu extends AbstractUIObject {
     
     @FindBy(linkText = "News")
     private ExtendedWebElement newsLink;
+
+    @FindBy(xpath = "//div[@id='footmenu']//a[@href]")
+    private List<ExtendedWebElement> brandLinks;
 
     public FooterMenu(WebDriver driver, SearchContext searchContext) {
         super(driver, searchContext);
@@ -52,5 +58,17 @@ public class FooterMenu extends AbstractUIObject {
     public NewsPage openNewsPage() {
         newsLink.click();
         return new NewsPage(driver);
+    }
+
+    public boolean isAllButtonsPresent() {
+        ExtendedWebElement[] webElements = brandLinks.toArray(new ExtendedWebElement[0]);
+        for (ExtendedWebElement b : brandLinks) {
+            System.out.println(b.getAttribute("href"));
+        }
+        return allElementsPresent(webElements);
+    }
+
+    public boolean clickEachButton() {
+        return true;
     }
 }
