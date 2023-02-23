@@ -43,6 +43,8 @@ public class HeaderMenu extends AbstractUIObject {
 
     @FindBy(xpath = "//a[contains(@href, 'register')]")
     private ExtendedWebElement registerLink;
+    @FindBy(xpath = "//div[@id='social-connect']//a[contains(@href, 'logout')]")
+    private ExtendedWebElement logOutLink;
 
     public HeaderMenu(WebDriver driver, SearchContext searchContext) {
         super(driver, searchContext);
@@ -95,6 +97,10 @@ public class HeaderMenu extends AbstractUIObject {
         int i = youtubeHref.indexOf('?');
         youtubeHref = youtubeHref.replace(youtubeHref.substring(i), "");
         return youtubeHref;
+    }
+
+    public ExtendedWebElement getLogOutLink() {
+        return logOutLink;
     }
 
     public boolean checkAllButtons() {

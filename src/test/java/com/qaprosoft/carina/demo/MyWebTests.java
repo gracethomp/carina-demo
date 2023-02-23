@@ -3,6 +3,7 @@ package com.qaprosoft.carina.demo;
 import com.qaprosoft.carina.core.foundation.IAbstractTest;
 import com.qaprosoft.carina.demo.gui.components.FooterMenu;
 import com.qaprosoft.carina.demo.gui.components.HeaderMenu;
+import com.qaprosoft.carina.demo.gui.components.LoginPopUp;
 import com.qaprosoft.carina.demo.gui.pages.HomePage;
 import com.qaprosoft.carina.demo.gui.pages.RegisterPage;
 import com.zebrunner.carina.core.registrar.ownership.MethodOwner;
@@ -67,6 +68,13 @@ public class MyWebTests implements IAbstractTest  {
         HomePage homePage = new HomePage(getDriver());
         homePage.open();
         Assert.assertTrue(homePage.isPageOpened(), "Home page is not opened");
+        HeaderMenu headerMenu = homePage.getHeaderMenu();
+        LoginPopUp loginPopUp = headerMenu.openLoginPopUp();
+        loginPopUp.fillEmailField("gracetomlinson26@gmail.com");
+        loginPopUp.fillPasswordField("qwe123");
+        loginPopUp.clickLogInButton();
+        headerMenu.openHomePage();
+        Assert.assertTrue(headerMenu.getLogOutLink().isElementPresent(), "User doesn't log in");
     }
 
 }
