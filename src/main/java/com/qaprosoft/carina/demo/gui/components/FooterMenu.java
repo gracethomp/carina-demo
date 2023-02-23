@@ -15,28 +15,30 @@
  */
 package com.qaprosoft.carina.demo.gui.components;
 
+import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
+import com.qaprosoft.carina.core.gui.AbstractUIObject;
+import com.qaprosoft.carina.demo.gui.pages.*;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
-import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
-import com.qaprosoft.carina.core.gui.AbstractUIObject;
-import com.qaprosoft.carina.demo.gui.pages.CompareModelsPage;
-import com.qaprosoft.carina.demo.gui.pages.HomePage;
-import com.qaprosoft.carina.demo.gui.pages.NewsPage;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class FooterMenu extends AbstractUIObject {
     @FindBy(linkText = "Home")
     private ExtendedWebElement homeLink;
 
-    @FindBy(xpath = "//div[@class='footer-inner']//a[contains(text(),'Compare')]")
+    @FindBy(xpath = "//div[@id='footer']//a[contains(text(),'Compare')]")
     private ExtendedWebElement compareLink;
     
     @FindBy(linkText = "News")
     private ExtendedWebElement newsLink;
+
+    @FindBy(linkText = "Reviews")
+    private ExtendedWebElement reviewLink;
+
+    @FindBy(linkText = "Glossary")
+    private ExtendedWebElement glossaryLink;
 
     @FindBy(xpath = "//div[@id='footer']//div[@id='footmenu']//a[@href]")
     private List<ExtendedWebElement> brandLinks;
@@ -60,12 +62,32 @@ public class FooterMenu extends AbstractUIObject {
         return new NewsPage(driver);
     }
 
+    public NetworkCoveragePage openCoveragePage(){
+        compareLink.click();
+        return new NetworkCoveragePage(driver);
+    }
+
+    public GlossaryPage openGlossaryPage(){
+        glossaryLink.click();
+        return new GlossaryPage(driver);
+    }
+
     public boolean isAllButtonsPresent() {
         ExtendedWebElement[] webElements = brandLinks.toArray(new ExtendedWebElement[0]);
         return allElementsPresent(webElements);
     }
 
     public boolean clickEachButton() {
-        return true;
+        NewsPage newsPage = openNewsPage();
+        if(!newsLink.getAttribute("href").equals(newsPage.getCurrentUrl()))
+            return false;
+        CompareModelsPage compareModelsPage = openComparePage();
+        if(!compareLink.getAttribute("href").equals(compareModelsPage.getCurrentUrl()))
+            return false;
+        NetworkCoveragePage coveragePage = openCoveragePage();
+        if(!compareLink.getAttribute("href").equals(compareModelsPage.getCurrentUrl()))
+            return false;
+        GlossaryPage glossaryPage = openGlossaryPage();
+        return (glossaryLink.getAttribute("href").equals(glossaryPage.getCurrentUrl()));
     }
 }

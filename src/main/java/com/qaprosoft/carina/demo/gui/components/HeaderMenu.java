@@ -109,15 +109,13 @@ public class HeaderMenu extends AbstractUIObject {
         if(!youtube.getCurrentUrl().equals(neededLink) || !youtube.isSubscribeWindowPresent())
             return false;
         navigateBack();
-        String linkRss = rssFeedLink.getAttribute("href");
-        RSSFeedPage rssFeedPage = openRSSFeed();
-        if (!linkRss.equals(rssFeedPage.getCurrentUrl()))
-            return false;
-        navigateBack();
         LoginPopUp loginPopUp = openLoginPopUp();
         if (!loginPopUp.isUIObjectPresent())
             return false;
         RegisterPage registerPage = openRegisterPage();
-        return registerLink.getAttribute("href").equals(registerPage.getCurrentUrl());
+        if(!registerLink.getAttribute("href").equals(registerPage.getCurrentUrl()))
+            return false;
+        RSSFeedPage rssFeedPage = openRSSFeed();
+        return rssFeedLink.getAttribute("href").equals(rssFeedPage.getCurrentUrl());
     }
 }

@@ -22,6 +22,7 @@ import com.qaprosoft.carina.demo.gui.components.HeaderMenu;
 import com.qaprosoft.carina.demo.gui.components.WeValuePrivacyAd;
 import com.zebrunner.carina.utils.Configuration;
 import com.zebrunner.carina.utils.R;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
@@ -40,7 +41,7 @@ public class HomePage extends AbstractPage {
     @FindBy(xpath = "//div[@id='footer']//div[@id='footmenu']")
     private FooterMenu footerMenu;
 
-    @FindBy(xpath = "//div[@id='footmenu']")
+    @FindBy(xpath = "//div[@id='footer']")
     private ExtendedWebElement footer;
 
     @FindBy(xpath = "//div[contains(@class, 'brandmenu-v2')]//a")
@@ -63,8 +64,17 @@ public class HomePage extends AbstractPage {
     }
 
     public FooterMenu getFooterMenu() {
-        footer.scrollTo();
+        scrollDownToFooter();
         return footerMenu;
+    }
+
+    public HomePage scrollDownToFooter() {
+        while (!footer.isElementPresent()) {
+            System.out.println(footer.isElementPresent());
+            JavascriptExecutor js = (JavascriptExecutor) driver;
+            js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
+        }
+        return this;
     }
 
     public BrandModelsPage selectBrand(String brand) {
