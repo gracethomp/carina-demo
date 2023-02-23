@@ -2,6 +2,7 @@ package com.qaprosoft.carina.demo;
 
 import com.qaprosoft.carina.core.foundation.IAbstractTest;
 import com.qaprosoft.carina.demo.gui.components.FooterMenu;
+import com.qaprosoft.carina.demo.gui.components.HeaderMenu;
 import com.qaprosoft.carina.demo.gui.pages.HomePage;
 import com.zebrunner.carina.core.registrar.ownership.MethodOwner;
 import com.zebrunner.carina.core.registrar.tag.Priority;
@@ -30,6 +31,9 @@ public class MyWebTests implements IAbstractTest  {
         HomePage homePage = new HomePage(getDriver());
         homePage.open();
         Assert.assertTrue(homePage.isPageOpened(), "Home page is not opened");
+        HeaderMenu headerMenu = homePage.getHeaderMenu();
+        Assert.assertTrue(headerMenu.isAllButtonsPresent(), "Some button aren't present");
+        Assert.assertTrue(headerMenu.checkAllButtons(), "noo!!");
     }
     @Test()
     @MethodOwner(owner = "Olena Babii")

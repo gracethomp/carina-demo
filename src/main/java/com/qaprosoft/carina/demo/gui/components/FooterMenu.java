@@ -38,7 +38,7 @@ public class FooterMenu extends AbstractUIObject {
     @FindBy(linkText = "News")
     private ExtendedWebElement newsLink;
 
-    @FindBy(xpath = "//div[@id='footmenu']//a[@href]")
+    @FindBy(xpath = "//div[@id='footer']//div[@id='footmenu']//a[@href]")
     private List<ExtendedWebElement> brandLinks;
 
     public FooterMenu(WebDriver driver, SearchContext searchContext) {
@@ -62,9 +62,6 @@ public class FooterMenu extends AbstractUIObject {
 
     public boolean isAllButtonsPresent() {
         ExtendedWebElement[] webElements = brandLinks.toArray(new ExtendedWebElement[0]);
-        for (ExtendedWebElement b : brandLinks) {
-            System.out.println(b.getAttribute("href"));
-        }
         return allElementsPresent(webElements);
     }
 
