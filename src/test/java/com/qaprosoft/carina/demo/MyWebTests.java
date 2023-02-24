@@ -4,8 +4,9 @@ import com.qaprosoft.carina.core.foundation.IAbstractTest;
 import com.qaprosoft.carina.demo.gui.components.FooterMenu;
 import com.qaprosoft.carina.demo.gui.components.HeaderMenu;
 import com.qaprosoft.carina.demo.gui.components.LoginPopUp;
-import com.qaprosoft.carina.demo.gui.pages.HomePage;
-import com.qaprosoft.carina.demo.gui.pages.RegisterPage;
+import com.qaprosoft.carina.demo.gui.enums.FooterButton;
+import com.qaprosoft.carina.demo.gui.enums.HeaderButton;
+import com.qaprosoft.carina.demo.gui.pages.*;
 import com.zebrunner.carina.core.registrar.ownership.MethodOwner;
 import com.zebrunner.carina.core.registrar.tag.Priority;
 import com.zebrunner.carina.core.registrar.tag.TestPriority;
@@ -25,7 +26,18 @@ public class MyWebTests implements IAbstractTest  {
         FooterMenu footerMenu = homePage.getFooterMenu();
         Assert.assertTrue(footerMenu.isUIObjectPresent(2), "Footer menu wasn't found!");
         Assert.assertTrue(footerMenu.isAllButtonsPresent(), "Some button aren't present");
-        Assert.assertTrue(footerMenu.clickEachButton(), "Buttons work incorrectly");
+        footerMenu.clickMenuButton(FooterButton.HOME);
+        homePage.scrollDownToFooter();
+        Assert.assertTrue(homePage.isPageOpened(), "Home page is not opened");
+        footerMenu.clickMenuButton(FooterButton.NEWS);
+        NewsPage newsPage = new NewsPage(getDriver());
+        Assert.assertTrue(newsPage.isOpen(), "News page is not open");
+        footerMenu.clickMenuButton(FooterButton.REVIEWS);
+        ReviewPage reviewPage = new ReviewPage(getDriver());
+        Assert.assertTrue(reviewPage.isOpen(), "Review page is not open");
+        footerMenu.clickMenuButton(FooterButton.COMPARE);
+        CompareModelsPage compareModelsPage = new CompareModelsPage(getDriver());
+        Assert.assertTrue(compareModelsPage.isOpen(), "Review page is not open");
     }
 
     @Test()
@@ -38,7 +50,17 @@ public class MyWebTests implements IAbstractTest  {
         HeaderMenu headerMenu = homePage.getHeaderMenu();
         Assert.assertTrue(headerMenu.isUIObjectPresent(2), "Header menu wasn't found!");
         Assert.assertTrue(headerMenu.isAllButtonsPresent(), "Some button aren't present");
-        Assert.assertTrue(headerMenu.checkAllButtons(), "Buttons work incorrectly");
+        headerMenu.clickMenuButton(HeaderButton.HOME);
+        Assert.assertTrue(homePage.isPageOpened(), "Home page is not opened");
+        headerMenu.clickMenuButton(HeaderButton.NEWS);
+        NewsPage newsPage = new NewsPage(getDriver());
+        Assert.assertTrue(newsPage.isOpen(), "News page is not open");
+        headerMenu.clickMenuButton(HeaderButton.REVIEWS);
+        ReviewPage reviewPage = new ReviewPage(getDriver());
+        Assert.assertTrue(reviewPage.isOpen(), "Review page is not open");
+        headerMenu.clickMenuButton(HeaderButton.VIDEOS);
+        VideoPage videoPage = new VideoPage(getDriver());
+        Assert.assertTrue(videoPage.isOpen(), "Video page is not open");
     }
     @Test()
     @MethodOwner(owner = "Olena Babii")
@@ -52,12 +74,8 @@ public class MyWebTests implements IAbstractTest  {
         Assert.assertTrue(header.isUIObjectPresent(2), "Header menu wasn't found!");
         RegisterPage registerPage = header.openRegisterPage();
         registerPage.getUserFormLink().scrollTo();
-        registerPage.fillNicknameField("gracetom" + random.nextInt(10000));
-        registerPage.fillEmailField("gracetom" + random.nextInt(10000) +"@mail.com");
-        registerPage.fillPasswordField("qwe123");
-        registerPage.agreeStoringData();
-        registerPage.agreeAge();
-        registerPage.clickSubmitButton();
+        registerPage.fillSignUpForm("gracetom" + random.nextInt(10000),
+                "gracetom" + random.nextInt(10000) +"@mail.com", "qwe123");
         Assert.assertTrue(registerPage.getSuccessSighUpMessage().isElementPresent(), "Registration is failed");
     }
 
@@ -70,9 +88,7 @@ public class MyWebTests implements IAbstractTest  {
         Assert.assertTrue(homePage.isPageOpened(), "Home page is not opened");
         HeaderMenu headerMenu = homePage.getHeaderMenu();
         LoginPopUp loginPopUp = headerMenu.openLoginPopUp();
-        loginPopUp.fillEmailField("gracetomlinson26@gmail.com");
-        loginPopUp.fillPasswordField("qwe123");
-        loginPopUp.clickLogInButton();
+        loginPopUp.fillLoginForm("gracetomlinson26@gmail.com", "qwe123");
         headerMenu.openHomePage();
         Assert.assertTrue(headerMenu.getLogOutLink().isElementPresent(), "User doesn't log in");
     }

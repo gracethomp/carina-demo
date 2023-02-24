@@ -18,19 +18,21 @@ public class LoginPopUp extends AbstractUIObject {
         super(driver, searchContext);
     }
 
-    public ExtendedWebElement fillEmailField(String email){
+    public LoginPopUp fillEmailField(String email){
         emailField.type(email);
-        return emailField;
+        return this;
     }
-    public ExtendedWebElement fillPasswordField(String password){
+    public LoginPopUp fillPasswordField(String password){
         passwordField.type(password);
-        return passwordField;
+        return this;
     }
-    public ExtendedWebElement clickLogInButton(){
+    public LoginPopUp clickLogInButton(){
         logInButton.click();
-        return logInButton;
+        return this;
     }
-    public void enterLogInHref(){
-        System.out.println(logInButton.getAttribute("href"));
+    public void fillLoginForm(String email, String password) {
+        fillEmailField(email);
+        fillPasswordField(password);
+        clickLogInButton();
     }
 }

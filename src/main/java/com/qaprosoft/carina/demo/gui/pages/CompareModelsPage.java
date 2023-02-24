@@ -37,11 +37,18 @@ public class CompareModelsPage extends AbstractPage {
     @FindBy(className = "compare-candidates")
     private ExtendedWebElement compareMenu;
 
+    @FindBy(xpath = "//h1[contains(text(), 'Compare')]")
+    private ExtendedWebElement titleMarker;
+
     public CompareModelsPage(WebDriver driver) {
         super(driver);
         setUiLoadedMarker(compareMenu);
         setPageAbsoluteURL(comparePageUrl);
         //setPageURL("/compare.php3");
+    }
+
+    public boolean isOpen(){
+        return titleMarker.isElementPresent();
     }
 
     public List<ModelSpecs> compareModels(String... models) {

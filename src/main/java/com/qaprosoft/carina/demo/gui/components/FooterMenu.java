@@ -17,6 +17,8 @@ package com.qaprosoft.carina.demo.gui.components;
 
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.qaprosoft.carina.core.gui.AbstractUIObject;
+import com.qaprosoft.carina.demo.gui.enums.FooterButton;
+import com.qaprosoft.carina.demo.gui.enums.HeaderButton;
 import com.qaprosoft.carina.demo.gui.pages.*;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
@@ -77,7 +79,7 @@ public class FooterMenu extends AbstractUIObject {
         return allElementsPresent(webElements);
     }
 
-    public boolean clickEachButton() {
+    /*public boolean clickEachButton() {
         NewsPage newsPage = openNewsPage();
         if(!newsLink.getAttribute("href").equals(newsPage.getCurrentUrl()))
             return false;
@@ -89,5 +91,9 @@ public class FooterMenu extends AbstractUIObject {
             return false;
         GlossaryPage glossaryPage = openGlossaryPage();
         return (glossaryLink.getAttribute("href").equals(glossaryPage.getCurrentUrl()));
+    }*/
+
+    public void clickMenuButton(FooterButton footerButton) {
+        brandLinks.get(footerButton.getValue()).click();
     }
 }

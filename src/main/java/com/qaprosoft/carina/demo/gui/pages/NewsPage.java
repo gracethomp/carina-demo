@@ -34,7 +34,11 @@ public class NewsPage extends AbstractPage {
     
     @FindBy(xpath="//div[@class='news-item']")
     private List<NewsItem> news;
-    
+
+    @FindBy(xpath = "//h1[contains(text(), 'News')]")
+    private ExtendedWebElement titleMarker;
+
+
     public NewsPage(WebDriver driver) {
         super(driver);
         setPageURL("/news.php3");
@@ -45,5 +49,8 @@ public class NewsPage extends AbstractPage {
         searchButton.click();
         return news;
     }
-    
+
+    public boolean isOpen(){
+        return titleMarker.isElementPresent();
+    }
 }

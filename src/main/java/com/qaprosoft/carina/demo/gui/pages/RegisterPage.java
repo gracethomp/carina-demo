@@ -19,7 +19,7 @@ public class RegisterPage extends AbstractPage {
     private ExtendedWebElement passwordField;
 
     @FindBy(xpath = "//label[@for='iagree1']")
-    private ExtendedWebElement agreement;
+    private ExtendedWebElement agreementCheckbox;
 
     @FindBy(xpath = "//label[@for='iagree2']")
     private ExtendedWebElement ageCheckbox;
@@ -42,28 +42,37 @@ public class RegisterPage extends AbstractPage {
         return successSighUpMessage;
     }
 
-    public ExtendedWebElement fillNicknameField(String nickname) {
+    public RegisterPage fillNicknameField(String nickname) {
         nicknameField.type(nickname);
-        return nicknameField;
+        return this;
     }
-    public ExtendedWebElement fillEmailField(String email) {
+    public RegisterPage fillEmailField(String email) {
         emailField.type(email);
-        return emailField;
+        return this;
     }
-    public ExtendedWebElement fillPasswordField(String password) {
+    public RegisterPage fillPasswordField(String password) {
         passwordField.type(password);
-        return passwordField;
+        return this;
     }
-    public ExtendedWebElement agreeStoringData(){
-        agreement.click();
-        return agreement;
+    public RegisterPage agreeStoringData(){
+        agreementCheckbox.click();
+        return this;
     }
-    public ExtendedWebElement agreeAge(){
+    public RegisterPage agreeAge(){
         ageCheckbox.click();
-        return ageCheckbox;
+        return this;
     }
-    public ExtendedWebElement clickSubmitButton(){
+    public RegisterPage clickSubmitButton(){
         submitButton.click();
-        return submitButton;
+        return this;
+    }
+
+    public void fillSignUpForm(String nickname, String email, String password){
+        fillNicknameField(nickname);
+        fillEmailField(email);
+        fillPasswordField(password);
+        agreeStoringData();
+        agreeAge();
+        clickSubmitButton();
     }
 }

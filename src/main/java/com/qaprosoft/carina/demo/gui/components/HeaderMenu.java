@@ -2,6 +2,7 @@ package com.qaprosoft.carina.demo.gui.components;
 
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.qaprosoft.carina.core.gui.AbstractUIObject;
+import com.qaprosoft.carina.demo.gui.enums.HeaderButton;
 import com.qaprosoft.carina.demo.gui.pages.*;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
@@ -43,8 +44,12 @@ public class HeaderMenu extends AbstractUIObject {
 
     @FindBy(xpath = "//a[contains(@href, 'register')]")
     private ExtendedWebElement registerLink;
+
     @FindBy(xpath = "//div[@id='social-connect']//a[contains(@href, 'logout')]")
     private ExtendedWebElement logOutLink;
+
+    @FindBy(xpath = "//ul[@id='menu']//a")
+    private List<ExtendedWebElement> buttons;
 
     public HeaderMenu(WebDriver driver, SearchContext searchContext) {
         super(driver, searchContext);
@@ -52,7 +57,7 @@ public class HeaderMenu extends AbstractUIObject {
 
     public boolean isAllButtonsPresent() {
         headerMenuButton.click();
-        ExtendedWebElement[] webElements = brandLinks.toArray(new ExtendedWebElement[0]);
+        ExtendedWebElement[] webElements = buttons.toArray(new ExtendedWebElement[0]);
         for (ExtendedWebElement w : webElements) {
             System.out.println(w.getAttribute("href"));
         }
@@ -62,6 +67,7 @@ public class HeaderMenu extends AbstractUIObject {
     public void openHeaderMenu(){
         headerMenuButton.click();
     }
+
     public HomePage openHomePage() {
         homeLink.click();
         return new HomePage(driver);
@@ -92,6 +98,7 @@ public class HeaderMenu extends AbstractUIObject {
         return new RegisterPage(driver);
     }
 
+
     public String getNeededYoutubeLink() {
         String youtubeHref = youtubeLink.getAttribute("href");
         int i = youtubeHref.indexOf('?');
@@ -103,7 +110,7 @@ public class HeaderMenu extends AbstractUIObject {
         return logOutLink;
     }
 
-    public boolean checkAllButtons() {
+    /*public boolean checkAllButtons() {
         HomePage homePage = openHomePage();
         if(!home.getAttribute("href").equals(homePage.getCurrentUrl()))
             return false;
@@ -123,5 +130,9 @@ public class HeaderMenu extends AbstractUIObject {
             return false;
         RSSFeedPage rssFeedPage = openRSSFeed();
         return rssFeedLink.getAttribute("href").equals(rssFeedPage.getCurrentUrl());
+    }*/
+
+    public void clickMenuButton(HeaderButton headerButton) {
+        buttons.get(headerButton.getValue()).click();
     }
 }
