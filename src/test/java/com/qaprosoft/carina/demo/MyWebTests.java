@@ -51,6 +51,7 @@ public class MyWebTests implements IAbstractTest  {
         Assert.assertTrue(headerMenu.isUIObjectPresent(2), "Header menu wasn't found!");
         Assert.assertTrue(headerMenu.isAllButtonsPresent(), "Some button aren't present");
         headerMenu.clickMenuButton(HeaderButton.HOME);
+        headerMenu.openHomePage().isPageOpened();
         Assert.assertTrue(homePage.isPageOpened(), "Home page is not opened");
         headerMenu.clickMenuButton(HeaderButton.NEWS);
         NewsPage newsPage = new NewsPage(getDriver());
@@ -89,8 +90,7 @@ public class MyWebTests implements IAbstractTest  {
         HeaderMenu headerMenu = homePage.getHeaderMenu();
         LoginPopUp loginPopUp = headerMenu.openLoginPopUp();
         loginPopUp.fillLoginForm("gracetomlinson26@gmail.com", "qwe123");
-        headerMenu.openHomePage();
-        Assert.assertTrue(headerMenu.getLogOutLink().isElementPresent(), "User doesn't log in");
+        Assert.assertEquals(getDriver().getCurrentUrl(), "https://www.gsmarena.com/login.php3",
+                "Next page isn't open");
     }
-
 }

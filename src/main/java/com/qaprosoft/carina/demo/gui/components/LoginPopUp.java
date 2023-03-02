@@ -30,9 +30,10 @@ public class LoginPopUp extends AbstractUIObject {
         logInButton.click();
         return this;
     }
-    public void fillLoginForm(String email, String password) {
+    public LoginPopUp fillLoginForm(String email, String password) {
         fillEmailField(email);
         fillPasswordField(password);
         clickLogInButton();
+        return this;
     }
 }

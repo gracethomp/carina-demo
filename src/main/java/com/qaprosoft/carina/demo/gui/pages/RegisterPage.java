@@ -67,12 +67,13 @@ public class RegisterPage extends AbstractPage {
         return this;
     }
 
-    public void fillSignUpForm(String nickname, String email, String password){
+    public RegisterPage fillSignUpForm(String nickname, String email, String password){
         fillNicknameField(nickname);
         fillEmailField(email);
         fillPasswordField(password);
         agreeStoringData();
         agreeAge();
         clickSubmitButton();
+        return this;
     }
 }
