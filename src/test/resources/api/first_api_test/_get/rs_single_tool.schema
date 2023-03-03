@@ -1,0 +1,83 @@
+{
+    "$schema": "https://json-schema.org/draft/2019-09/schema",
+    "$id": "http://example.com/example.json",
+    "title": "Root Schema",
+    "type": "object",
+    "default": {},
+    "required": [
+        "id",
+        "category",
+        "name",
+        "manufacturer",
+        "price",
+        "current-stock",
+        "inStock"
+    ],
+    "properties": {
+        "id": {
+            "title": "The id Schema",
+            "type": "integer",
+            "default": 0,
+            "examples": [
+                4643
+            ]
+        },
+        "category": {
+            "title": "The category Schema",
+            "type": "string",
+            "default": "",
+            "examples": [
+                "plumbing"
+            ]
+        },
+        "name": {
+            "title": "The name Schema",
+            "type": "string",
+            "default": "",
+            "examples": [
+                "PEX Clamp Tool"
+            ]
+        },
+        "manufacturer": {
+            "title": "The manufacturer Schema",
+            "type": "string",
+            "default": "",
+            "examples": [
+                "JWGJW"
+            ]
+        },
+        "price": {
+            "title": "The price Schema",
+            "type": "number",
+            "default": 0.0,
+            "examples": [
+                3.45
+            ]
+        },
+        "current-stock": {
+            "title": "The current-stock Schema",
+            "type": "integer",
+            "default": 0,
+            "examples": [
+                14
+            ]
+        },
+        "inStock": {
+            "title": "The inStock Schema",
+            "type": "boolean",
+            "default": false,
+            "examples": [
+                true
+            ]
+        }
+    },
+    "examples": [{
+        "id": 4643,
+        "category": "plumbing",
+        "name": "PEX Clamp Tool",
+        "manufacturer": "JWGJW",
+        "price": 3.45,
+        "current-stock": 14,
+        "inStock": true
+    }]
+}

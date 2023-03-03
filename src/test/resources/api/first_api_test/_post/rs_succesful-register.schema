@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "$id": "http://example.com/example.json",
+  "type": "object",
+  "default": {},
+  "title": "Root Schema",
+  "required": [
+    "accessToken"
+  ],
+  "properties": {
+    "accessToken": {
+      "type": "string",
+      "default": "",
+      "title": "The accessToken Schema",
+      "examples": [
+        "c6a93751b3963900b3afa0c721d6dca80fcb124b13e2bb62db054ea61a8aa8e9"
+      ]
+    }
+  },
+  "examples": [{
+    "accessToken": "c6a93751b3963900b3afa0c721d6dca80fcb124b13e2bb62db054ea61a8aa8e9"
+  }]
+}
