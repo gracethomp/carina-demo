@@ -1,0 +1,37 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "array",
+  "items": [
+    {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "toolId": {
+          "type": "integer"
+        },
+        "customerName": {
+          "type": "string"
+        },
+        "quantity": {
+          "type": "integer"
+        },
+        "created": {
+          "type": "string"
+        },
+        "comment": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "toolId",
+        "customerName",
+        "quantity",
+        "created",
+        "comment"
+      ]
+    }
+  ]
+}

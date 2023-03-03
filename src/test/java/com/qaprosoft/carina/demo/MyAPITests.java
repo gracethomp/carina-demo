@@ -2,10 +2,7 @@ package com.qaprosoft.carina.demo;
 
 import com.qaprosoft.apitools.validation.JsonCompareKeywords;
 import com.qaprosoft.carina.core.foundation.IAbstractTest;
-import com.qaprosoft.carina.demo.api.my_requests.GetAllToolsMethod;
-import com.qaprosoft.carina.demo.api.my_requests.GetSingleToolMethod;
-import com.qaprosoft.carina.demo.api.my_requests.GetStatusMethod;
-import com.qaprosoft.carina.demo.api.my_requests.PostUserMethod;
+import com.qaprosoft.carina.demo.api.my_requests.*;
 import com.zebrunner.carina.core.registrar.ownership.MethodOwner;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 import org.testng.annotations.DataProvider;
@@ -33,10 +30,10 @@ public class MyAPITests implements IAbstractTest {
     @MethodOwner(owner = "Olena Babii")
     public void testGetSingleTool(String id){
         GetSingleToolMethod getSingleToolMethod = new GetSingleToolMethod();
-        getSingleToolMethod.request.given().pathParam("toolID", id);
+        getSingleToolMethod.replaceUrlPlaceholder("toolID", id);
+        //getSingleToolMethod.request.given().pathParam("toolID", id);
         getSingleToolMethod.callAPI();
         getSingleToolMethod.validateResponseAgainstSchema("api/first_api_test/_get/rs_single_tool.schema");
-        //getSingleToolMethod.validateResponse();
     }
 
     @Test()
@@ -46,6 +43,35 @@ public class MyAPITests implements IAbstractTest {
         postUserMethod.setProperties("api/first_api_test/_post/user-data.properties");
         postUserMethod.callAPI();
         postUserMethod.validateResponseAgainstSchema("api/first_api_test/_post/rs_succesful-register.schema");
+    }
+
+    @Test()
+    @MethodOwner(owner = "Olena Babii")
+    public void testOrdersWorkNoAuth(){
+        GetOrdersMethod getOrdersMethod = new GetOrdersMethod();
+        getOrdersMethod.setResponseTemplate("api/first_api_test/_get/rs_no-auth.json");
+        getOrdersMethod.callAPI();
+        getOrdersMethod.validateResponse();
+    }
+
+    @Test()
+    @MethodOwner(owner = "Olena Babii")
+    public void testOrdersWorkWithAuth(){
+        GetOrdersMethod getOrdersMethod = new GetOrdersMethod();
+        getOrdersMethod.setHeader("Authorization", "c6a93751b3963900b3afa0c721d6dca80fcb124b13e2bb62db054ea61a8aa8e9");
+        getOrdersMethod.callAPI();
+        getOrdersMethod.validateResponseAgainstSchema("api/first_api_test/_get/rs_orders.schema");
+    }
+
+    @Test(dataProvider = "DP1")
+    @MethodOwner(owner = "Olena Babii")
+    public void testCreateOrder(String id){
+        PostOrderMethod postOrderMethod = new PostOrderMethod();
+        postOrderMethod.setProperties("api/first_api_test/_post/order-data.properties");
+        postOrderMethod.setHeader("Authorization", "c6a93751b3963900b3afa0c721d6dca80fcb124b13e2bb62db054ea61a8aa8e9");
+        postOrderMethod.getProperties().put("toolId", Integer.valueOf(id));
+        postOrderMethod.callAPI();
+        postOrderMethod.validateResponseAgainstSchema("api/first_api_test/_post/rs_created-order.schema");
     }
 
     @DataProvider(name = "DP1")

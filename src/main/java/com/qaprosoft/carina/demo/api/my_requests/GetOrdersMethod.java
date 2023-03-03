@@ -8,11 +8,10 @@ import com.qaprosoft.carina.core.foundation.api.http.HttpMethodType;
 import com.qaprosoft.carina.core.foundation.api.http.HttpResponseStatusType;
 import com.zebrunner.carina.utils.Configuration;
 
-@Endpoint(url = "${base_url}/tools/${toolID}", methodType = HttpMethodType.GET)
-@ResponseTemplatePath(path = "api/first_api_test/_get/rs_all_tools.json")
+@Endpoint(url = "${base_url}/orders", methodType = HttpMethodType.GET)
 @SuccessfulHttpStatus(status = HttpResponseStatusType.OK_200)
-public class GetSingleToolMethod extends AbstractApiMethodV2 {
-    public GetSingleToolMethod() {
+public class GetOrdersMethod extends AbstractApiMethodV2 {
+    public GetOrdersMethod() {
         replaceUrlPlaceholder("base_url", Configuration.getEnvArg("api_url"));
     }
 }
