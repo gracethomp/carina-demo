@@ -2,11 +2,17 @@ package com.qaprosoft.carina.demo;
 
 import com.qaprosoft.apitools.validation.JsonCompareKeywords;
 import com.qaprosoft.carina.core.foundation.IAbstractTest;
+import com.qaprosoft.carina.core.foundation.api.http.HttpResponseStatus;
+import com.qaprosoft.carina.core.foundation.api.http.HttpResponseStatusType;
+import com.qaprosoft.carina.core.foundation.dataprovider.annotations.XlsDataSourceParameters;
 import com.qaprosoft.carina.demo.api.my_requests.*;
 import com.zebrunner.carina.core.registrar.ownership.MethodOwner;
 import org.skyscreamer.jsonassert.JSONCompareMode;
+import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+
+import java.util.HashMap;
 
 
 public class MyAPITests implements IAbstractTest {
@@ -73,6 +79,40 @@ public class MyAPITests implements IAbstractTest {
         postOrderMethod.callAPI();
         postOrderMethod.validateResponseAgainstSchema("api/first_api_test/_post/rs_created-order.schema");
     }
+
+    @Test(dataProvider = "DataProvider")
+    @MethodOwner(owner = "Olena Babii")
+    @XlsDataSourceParameters(path = "xls/myapi.xlsx", sheet = "Лист1", dsUid = "id")
+    public void testGetOrderById(HashMap<String, String> args){
+        GetSingleOrderMethod getOrderMethod = new GetSingleOrderMethod();
+        getOrderMethod.setHeader("Authorization", "c6a93751b3963900b3afa0c721d6dca80fcb124b13e2bb62db054ea61a8aa8e9");
+        getOrderMethod.request.pathParam("orderId", args.get("id"));
+        getOrderMethod.callAPIExpectSuccess();
+        getOrderMethod.validateResponseAgainstSchema("api/first_api_test/_get/rs_single-order.schema");
+    }
+
+    @Test(dataProvider = "DataProvider")
+    @MethodOwner(owner = "Olena Babii")
+    @XlsDataSourceParameters(path = "xls/myapi.xlsx", sheet = "Лист1", dsUid = "id")
+    public void testPatchOrder(HashMap<String, String> args){
+        PatchOrderMethod patchOrderMethod = new PatchOrderMethod();
+        patchOrderMethod.setProperties("api/first_api_test/_patch/order.properties");
+        patchOrderMethod.setHeader("Authorization", "c6a93751b3963900b3afa0c721d6dca80fcb124b13e2bb62db054ea61a8aa8e9");
+        patchOrderMethod.request.pathParam("orderId", args.get("id"));
+        patchOrderMethod.callAPIExpectSuccess();
+    }
+
+    @Test(dataProvider = "DataProvider")
+    @MethodOwner(owner = "Olena Babii")
+    @XlsDataSourceParameters(path = "xls/myapi.xlsx", sheet = "Лист1", dsUid = "id")
+    public void testPatchNoAuth(HashMap<String, String> args){
+        PatchOrderMethod patchOrderMethod = new PatchOrderMethod();
+        patchOrderMethod.setProperties("api/first_api_test/_patch/order.properties");
+        patchOrderMethod.request.pathParam("orderId", args.get("id"));
+        Assert.assertEquals(patchOrderMethod.callAPI().getStatusCode(), 401, "wrong status!");
+    }
+
+
 
     @DataProvider(name = "DP1")
     public static Object[][] provider() {

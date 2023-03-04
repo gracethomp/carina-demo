@@ -1,0 +1,4 @@
+{
+  "customerName": "${customerName}",
+  "comment": "${comment}"
+}
