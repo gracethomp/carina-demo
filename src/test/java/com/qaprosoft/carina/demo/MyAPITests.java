@@ -1,17 +1,18 @@
 package com.qaprosoft.carina.demo;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.qaprosoft.apitools.validation.JsonCompareKeywords;
 import com.qaprosoft.carina.core.foundation.IAbstractTest;
-import com.qaprosoft.carina.core.foundation.api.http.HttpResponseStatus;
-import com.qaprosoft.carina.core.foundation.api.http.HttpResponseStatusType;
 import com.qaprosoft.carina.core.foundation.dataprovider.annotations.XlsDataSourceParameters;
 import com.qaprosoft.carina.demo.api.my_requests.*;
+import com.qaprosoft.carina.demo.api.my_requests.models.Order;
 import com.zebrunner.carina.core.registrar.ownership.MethodOwner;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import java.io.IOException;
 import java.util.HashMap;
 
 
@@ -112,7 +113,21 @@ public class MyAPITests implements IAbstractTest {
         Assert.assertEquals(patchOrderMethod.callAPI().getStatusCode(), 401, "wrong status!");
     }
 
-
+    @Test()
+    @MethodOwner(owner = "Olena Babii")
+    public void testDeleteMethod() throws IOException {
+        PostOrderMethod postOrderMethod = new PostOrderMethod();
+        postOrderMethod.setProperties("api/first_api_test/_post/order-data.properties");
+        postOrderMethod.setHeader("Authorization", "c6a93751b3963900b3afa0c721d6dca80fcb124b13e2bb62db054ea61a8aa8e9");
+        postOrderMethod.getProperties().put("toolId", 5499);
+        String rs = postOrderMethod.callAPI().asString();
+        ObjectMapper mapper = new ObjectMapper();
+        Order order = mapper.readValue(rs, Order.class);
+        DeleteOrderMethod deleteOrderMethod = new DeleteOrderMethod();
+        deleteOrderMethod.setHeader("Authorization","c6a93751b3963900b3afa0c721d6dca80fcb124b13e2bb62db054ea61a8aa8e9");
+        deleteOrderMethod.request.pathParam("orderId", order.getOrderId());
+        deleteOrderMethod.callAPIExpectSuccess();
+    }
 
     @DataProvider(name = "DP1")
     public static Object[][] provider() {
