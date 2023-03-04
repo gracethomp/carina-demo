@@ -30,26 +30,27 @@ public class MyAPITests implements IAbstractTest {
     public void testGetAllTools() {
         GetAllToolsMethod getAllToolsMethod = new GetAllToolsMethod();
         getAllToolsMethod.callAPI();
-        getAllToolsMethod.validateResponse();
+        getAllToolsMethod.validateResponse(JSONCompareMode.STRICT, JsonCompareKeywords.ARRAY_CONTAINS.getKey());
     }
 
     @Test(dataProvider = "DP1")
     @MethodOwner(owner = "Olena Babii")
     public void testGetSingleTool(String id){
-        GetSingleToolMethod getSingleToolMethod = new GetSingleToolMethod();
-        getSingleToolMethod.replaceUrlPlaceholder("toolID", id);
-        //getSingleToolMethod.request.given().pathParam("toolID", id);
-        getSingleToolMethod.callAPI();
-        getSingleToolMethod.validateResponseAgainstSchema("api/first_api_test/_get/rs_single_tool.schema");
+        GetSingleToolMethod getToolMethod = new GetSingleToolMethod();
+        getToolMethod.replaceUrlPlaceholder("toolID", id);
+        //getToolMethod.request.given().pathParam("toolID", id);
+        getToolMethod.callAPI();
+        getToolMethod.validateResponseAgainstSchema("api/first_api_test/tools/_get/rs_single_tool.schema");
     }
 
     @Test()
     @MethodOwner(owner = "Olena Babii")
     public void testPostUserMethod(){
         PostUserMethod postUserMethod = new PostUserMethod();
-        postUserMethod.setProperties("api/first_api_test/_post/user-data.properties");
+        postUserMethod.setProperties("api/first_api_test/user-data.properties");
         postUserMethod.callAPI();
-        postUserMethod.validateResponseAgainstSchema("api/first_api_test/_post/rs_succesful-register.schema");
+        postUserMethod.validateResponseAgainstSchema(
+                "api/first_api_test/api-clients/_post/rs_succesful-register.schema");
     }
 
     @Test()
@@ -58,7 +59,7 @@ public class MyAPITests implements IAbstractTest {
         GetOrdersMethod getOrdersMethod = new GetOrdersMethod();
         getOrdersMethod.setResponseTemplate("api/first_api_test/_get/rs_no-auth.json");
         getOrdersMethod.callAPI();
-        getOrdersMethod.validateResponse();
+        getOrdersMethod.validateResponse(JSONCompareMode.STRICT, JsonCompareKeywords.ARRAY_CONTAINS.getKey());
     }
 
     @Test()
@@ -67,18 +68,18 @@ public class MyAPITests implements IAbstractTest {
         GetOrdersMethod getOrdersMethod = new GetOrdersMethod();
         getOrdersMethod.setHeader("Authorization", "c6a93751b3963900b3afa0c721d6dca80fcb124b13e2bb62db054ea61a8aa8e9");
         getOrdersMethod.callAPI();
-        getOrdersMethod.validateResponseAgainstSchema("api/first_api_test/_get/rs_orders.schema");
+        getOrdersMethod.validateResponseAgainstSchema("api/first_api_test/orders/_get/rs_orders.schema");
     }
 
     @Test(dataProvider = "DP1")
     @MethodOwner(owner = "Olena Babii")
     public void testCreateOrder(String id){
         PostOrderMethod postOrderMethod = new PostOrderMethod();
-        postOrderMethod.setProperties("api/first_api_test/_post/order-data.properties");
+        postOrderMethod.setProperties("api/first_api_test/orders/order-data.properties");
         postOrderMethod.setHeader("Authorization", "c6a93751b3963900b3afa0c721d6dca80fcb124b13e2bb62db054ea61a8aa8e9");
         postOrderMethod.getProperties().put("toolId", Integer.valueOf(id));
         postOrderMethod.callAPI();
-        postOrderMethod.validateResponseAgainstSchema("api/first_api_test/_post/rs_created-order.schema");
+        postOrderMethod.validateResponseAgainstSchema("api/first_api_test/orders/_post/rs_created-order.schema");
     }
 
     @Test(dataProvider = "DataProvider")
@@ -89,7 +90,7 @@ public class MyAPITests implements IAbstractTest {
         getOrderMethod.setHeader("Authorization", "c6a93751b3963900b3afa0c721d6dca80fcb124b13e2bb62db054ea61a8aa8e9");
         getOrderMethod.request.pathParam("orderId", args.get("id"));
         getOrderMethod.callAPIExpectSuccess();
-        getOrderMethod.validateResponseAgainstSchema("api/first_api_test/_get/rs_single-order.schema");
+        getOrderMethod.validateResponseAgainstSchema("api/first_api_test/orders/_get/rs_single-order.schema");
     }
 
     @Test(dataProvider = "DataProvider")
@@ -97,7 +98,7 @@ public class MyAPITests implements IAbstractTest {
     @XlsDataSourceParameters(path = "xls/myapi.xlsx", sheet = "Лист1", dsUid = "id")
     public void testPatchOrder(HashMap<String, String> args){
         PatchOrderMethod patchOrderMethod = new PatchOrderMethod();
-        patchOrderMethod.setProperties("api/first_api_test/_patch/order.properties");
+        patchOrderMethod.setProperties("api/first_api_test/orders/order-patch.properties");
         patchOrderMethod.setHeader("Authorization", "c6a93751b3963900b3afa0c721d6dca80fcb124b13e2bb62db054ea61a8aa8e9");
         patchOrderMethod.request.pathParam("orderId", args.get("id"));
         patchOrderMethod.callAPIExpectSuccess();
@@ -108,7 +109,7 @@ public class MyAPITests implements IAbstractTest {
     @XlsDataSourceParameters(path = "xls/myapi.xlsx", sheet = "Лист1", dsUid = "id")
     public void testPatchNoAuth(HashMap<String, String> args){
         PatchOrderMethod patchOrderMethod = new PatchOrderMethod();
-        patchOrderMethod.setProperties("api/first_api_test/_patch/order.properties");
+        patchOrderMethod.setProperties("api/first_api_test/orders/order-patch.properties");
         patchOrderMethod.request.pathParam("orderId", args.get("id"));
         Assert.assertEquals(patchOrderMethod.callAPI().getStatusCode(), 401, "wrong status!");
     }
@@ -117,7 +118,7 @@ public class MyAPITests implements IAbstractTest {
     @MethodOwner(owner = "Olena Babii")
     public void testDeleteMethod() throws IOException {
         PostOrderMethod postOrderMethod = new PostOrderMethod();
-        postOrderMethod.setProperties("api/first_api_test/_post/order-data.properties");
+        postOrderMethod.setProperties("api/first_api_test/orders/order-data.properties");
         postOrderMethod.setHeader("Authorization", "c6a93751b3963900b3afa0c721d6dca80fcb124b13e2bb62db054ea61a8aa8e9");
         postOrderMethod.getProperties().put("toolId", 5499);
         String rs = postOrderMethod.callAPI().asString();

@@ -9,7 +9,7 @@ import com.qaprosoft.carina.core.foundation.api.http.HttpResponseStatusType;
 import com.zebrunner.carina.utils.Configuration;
 
 @Endpoint(url = "${base_url}/tools", methodType = HttpMethodType.GET)
-@ResponseTemplatePath(path = "api/first_api_test/_get/rs_all_tools.json")
+@ResponseTemplatePath(path = "api/first_api_test/tools/_get/rs_all_tools.json")
 @SuccessfulHttpStatus(status = HttpResponseStatusType.OK_200)
 public class GetAllToolsMethod extends AbstractApiMethodV2 {
     public GetAllToolsMethod() {

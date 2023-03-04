@@ -9,7 +9,7 @@ import com.qaprosoft.carina.core.foundation.api.http.HttpResponseStatusType;
 import com.zebrunner.carina.utils.Configuration;
 
 @Endpoint(url = "${base_url}/orders/{orderId}", methodType = HttpMethodType.PATCH)
-@RequestTemplatePath(path = "api/first_api_test/_patch/rq_patch.json")
+@RequestTemplatePath(path = "api/first_api_test/orders/_patch/rq_patch.json")
 @SuccessfulHttpStatus(status = HttpResponseStatusType.NO_CONTENT_204)
 public class PatchOrderMethod extends AbstractApiMethodV2 {
     public PatchOrderMethod() {

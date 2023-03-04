@@ -9,7 +9,7 @@ import com.qaprosoft.carina.core.foundation.api.http.HttpResponseStatusType;
 import com.zebrunner.carina.utils.Configuration;
 
 @Endpoint(url = "${base_url}/status", methodType = HttpMethodType.GET)
-@ResponseTemplatePath(path = "api/first_api_test/_get/rs_status.json")
+@ResponseTemplatePath(path = "api/first_api_test/status/_get/rs_status.json")
 @SuccessfulHttpStatus(status = HttpResponseStatusType.OK_200)
 public class GetStatusMethod extends AbstractApiMethodV2 {
     public GetStatusMethod() {
