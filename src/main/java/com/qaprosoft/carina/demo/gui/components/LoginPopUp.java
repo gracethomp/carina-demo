@@ -36,4 +36,8 @@ public class LoginPopUp extends AbstractUIObject {
         clickLogInButton();
         return this;
     }
+
+    public ExtendedWebElement getEmailField() {
+        return emailField;
+    }
 }

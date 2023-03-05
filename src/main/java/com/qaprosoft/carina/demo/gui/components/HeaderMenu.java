@@ -8,6 +8,7 @@ import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class HeaderMenu extends AbstractUIObject {
@@ -79,7 +80,10 @@ public class HeaderMenu extends AbstractUIObject {
     }
 
     public YoutubePage openYouTubeLink() {
-        driver.get(youtubeLink.getAttribute("href"));
+        youtubeLink.click();
+        List<String> openTabs = new ArrayList<>(driver.getWindowHandles());
+        driver.switchTo().window(openTabs.get(openTabs.size() - 1));
+        //driver.get(youtubeLink.getAttribute("href"));
         return new YoutubePage(driver);
     }
 

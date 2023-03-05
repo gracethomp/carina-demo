@@ -9,6 +9,9 @@ public class YoutubePage extends AbstractPage {
     @FindBy(xpath = "//div[@id='main']")
     private ExtendedWebElement webElement;
 
+    @FindBy(id = "player-container")
+    private ExtendedWebElement mainVideo;
+
     public YoutubePage(WebDriver driver) {
         super(driver);
     }

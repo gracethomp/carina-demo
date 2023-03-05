@@ -53,6 +53,9 @@ public class HomePage extends AbstractPage {
     @FindBy(className = "news-column-index")
     private ExtendedWebElement newsColumn;
 
+    @FindBy(xpath = "//article[contains(@class, 'main')]//img")
+    private ExtendedWebElement honorImage;
+
     public HomePage(WebDriver driver) {
         super(driver);
         setUiLoadedMarker(newsColumn);
@@ -89,11 +92,22 @@ public class HomePage extends AbstractPage {
         throw new RuntimeException("Unable to open brand: " + brand);
     }
 
+    public boolean isImageIncrease() {
+        honorImage.hover();
+        String scale = honorImage.getElement().getCssValue("transform");
+        double scaleValue = Double.parseDouble(scale.substring(scale.indexOf('(') + 1, scale.indexOf(',')));
+        return scaleValue > 1;
+    }
+
     public WeValuePrivacyAd getWeValuePrivacyAd() {
         return new WeValuePrivacyAd(driver);
     }
 
     public ExtendedWebElement getPhoneFinderButton() {
         return phoneFinderButton;
+    }
+
+    public ExtendedWebElement getHonorImage() {
+        return honorImage;
     }
 }

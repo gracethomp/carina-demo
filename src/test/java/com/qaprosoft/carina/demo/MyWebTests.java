@@ -93,4 +93,27 @@ public class MyWebTests implements IAbstractTest  {
         Assert.assertEquals(getDriver().getCurrentUrl(), "https://www.gsmarena.com/login.php3",
                 "Next page isn't open");
     }
+
+    @Test()
+    @MethodOwner(owner = "Olena Babii")
+    public void testIncreasingImage() {
+        HomePage homePage = new HomePage(getDriver());
+        homePage.open();
+        homePage.getHonorImage().hover();
+        Assert.assertTrue(homePage.isImageIncrease(), "No increasing!");
+    }
+
+    @Test()
+    @MethodOwner(owner = "Olena Babii")
+    public void testYoutubePage(){
+        HomePage homePage = new HomePage(getDriver());
+        homePage.open();
+        HeaderMenu headerMenu = homePage.getHeaderMenu();
+        String str = getDriver().getWindowHandle();
+        YoutubePage youtubePage = headerMenu.openYouTubeLink();
+        Assert.assertTrue(youtubePage.isSubscribeWindowPresent(), "No subscribe message!");
+        youtubePage.getDriver().close();
+        getDriver().switchTo().window(str);
+        Assert.assertEquals(getDriver().getCurrentUrl(), "https://www.gsmarena.com/", "Wrong URL!");
+    }
 }
