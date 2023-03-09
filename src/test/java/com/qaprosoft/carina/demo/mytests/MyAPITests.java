@@ -1,4 +1,4 @@
-package com.qaprosoft.carina.demo;
+package com.qaprosoft.carina.demo.mytests;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.qaprosoft.apitools.validation.JsonCompareKeywords;

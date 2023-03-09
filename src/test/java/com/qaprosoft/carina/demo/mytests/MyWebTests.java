@@ -1,4 +1,4 @@
-package com.qaprosoft.carina.demo;
+package com.qaprosoft.carina.demo.mytests;
 
 import com.qaprosoft.carina.core.foundation.IAbstractTest;
 import com.qaprosoft.carina.demo.gui.components.FooterMenu;
@@ -63,6 +63,7 @@ public class MyWebTests implements IAbstractTest  {
         VideoPage videoPage = new VideoPage(getDriver());
         Assert.assertTrue(videoPage.isOpen(), "Video page is not open");
     }
+
     @Test()
     @MethodOwner(owner = "Olena Babii")
     @TestPriority(Priority.P3)
@@ -116,4 +117,27 @@ public class MyWebTests implements IAbstractTest  {
         getDriver().switchTo().window(str);
         Assert.assertEquals(getDriver().getCurrentUrl(), "https://www.gsmarena.com/", "Wrong URL!");
     }
+
+    @Test()
+    @MethodOwner(owner = "Olena Babii")
+    public void testBrandLinks(){
+        HomePage homePage = new HomePage(getDriver());
+        homePage.open();
+        homePage.getBrandLinks().forEach(link -> {
+            link.hover();
+            Assert.assertEquals(link.getElement().getCssValue("background-color"),
+                    "rgba(213, 0, 0, 1)", "Wrong color!");
+        });
+    }
+
+    @Test()
+    @MethodOwner(owner = "Olena Babii")
+    public void testMargin(){
+        HomePage homePage = new HomePage(getDriver());
+        homePage.open();
+        ModelReviewPage modelReviewPage = homePage.openMotorolaPage();
+        Assert.assertEquals(modelReviewPage.getMarginValue(),
+                "0px 30px 15px", "Text format is incorrect");
+    }
+
 }

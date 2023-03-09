@@ -92,6 +92,11 @@ public class HomePage extends AbstractPage {
         throw new RuntimeException("Unable to open brand: " + brand);
     }
 
+    public ModelReviewPage openMotorolaPage(){
+        honorImage.click();
+        return new ModelReviewPage(driver);
+    }
+
     public boolean isImageIncrease() {
         honorImage.hover();
         String scale = honorImage.getElement().getCssValue("transform");
@@ -109,5 +114,9 @@ public class HomePage extends AbstractPage {
 
     public ExtendedWebElement getHonorImage() {
         return honorImage;
+    }
+
+    public List<ExtendedWebElement> getBrandLinks() {
+        return brandLinks;
     }
 }
