@@ -140,4 +140,11 @@ public class MyWebTests implements IAbstractTest  {
                 "0px 30px 15px", "Text format is incorrect");
     }
 
+    @Test
+    @MethodOwner(owner = "Olena Babii")
+    public void test(){
+        MerchMainPage merchMainPage = new MerchMainPage(getDriver());
+        merchMainPage.openURL("https://merch.gsmarena.com/collections/all");
+    }
+
 }

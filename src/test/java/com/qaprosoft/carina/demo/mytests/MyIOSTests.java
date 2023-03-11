@@ -36,10 +36,13 @@ public class MyIOSTests implements IAbstractTest, IMobileUtils {
 
     @Test()
     @MethodOwner(owner = "Olena Babii")
-    public void testLoginForm() {
+    public void testSignUpForm() {
         SignUpPage signUpPage = new SignUpPage(getDriver());
         signUpPage.openURL("https://m.gsmarena.com/register.php3");
         swipe(signUpPage.getSubmitButton());
-        signUpPage.fillNicknameField("gracetom");
+        signUpPage.fillNicknameField(RandomStringUtils.randomAlphabetic(8)).fillPasswordField("qwerty123").
+                fillEmailField(RandomStringUtils.randomAlphabetic(8) + "@mail.com").agreeTerms().agreeAge();
+        signUpPage.getSubmitButton().click(); //to change
+        Assert.assertTrue(signUpPage.getSuccessMessage().isElementPresent(), "Unsuccessful sign up!");
     }
 }
