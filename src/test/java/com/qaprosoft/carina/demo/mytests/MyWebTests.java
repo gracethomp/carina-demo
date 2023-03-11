@@ -147,4 +147,12 @@ public class MyWebTests implements IAbstractTest  {
         merchMainPage.openURL("https://merch.gsmarena.com/collections/all");
     }
 
+    @Test
+    @MethodOwner(owner = "Olena Babii")
+    public void test1() {
+        MerchMainPage merchMainPage = new MerchMainPage(getDriver());
+        merchMainPage.openURL("https://merch.gsmarena.com/collections/all");
+
+        merchMainPage.clickCameraIslandsTee();
+    }
 }

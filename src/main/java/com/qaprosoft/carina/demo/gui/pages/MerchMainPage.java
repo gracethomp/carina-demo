@@ -8,7 +8,7 @@ import org.openqa.selenium.support.FindBy;
 import java.util.List;
 
 public class MerchMainPage extends AbstractPage {
-    @FindBy(xpath = "//div[@class='grid__column grid__column--6 grid__column--3@md'][2]")
+    @FindBy(xpath = "//div[@class='grid__column grid__column--6 grid__column--3@md'][1]")
     private ProductTile cameraIslandsTeeTShirt;
 
     @FindBy(xpath = "//div[@class='grid__column grid__column--6 grid__column--3@md']")
@@ -20,5 +20,10 @@ public class MerchMainPage extends AbstractPage {
 
     public List<ProductTile> getProductTiles() {
         return productTiles;
+    }
+
+    public CameraIslandsTeePage clickCameraIslandsTee(){
+        productTiles.get(1).getSeeMoreButton().click();
+        return new CameraIslandsTeePage(driver);
     }
 }
