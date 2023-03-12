@@ -4,6 +4,7 @@ import com.qaprosoft.carina.core.foundation.IAbstractTest;
 import com.qaprosoft.carina.demo.gui.components.FooterMenu;
 import com.qaprosoft.carina.demo.gui.components.HeaderMenu;
 import com.qaprosoft.carina.demo.gui.components.LoginPopUp;
+import com.qaprosoft.carina.demo.gui.components.ProductDrawer;
 import com.qaprosoft.carina.demo.gui.enums.FooterButton;
 import com.qaprosoft.carina.demo.gui.enums.HeaderButton;
 import com.qaprosoft.carina.demo.gui.pages.*;
@@ -12,6 +13,7 @@ import com.zebrunner.carina.core.registrar.tag.Priority;
 import com.zebrunner.carina.core.registrar.tag.TestPriority;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 import java.util.Random;
 
@@ -142,9 +144,31 @@ public class MyWebTests implements IAbstractTest  {
 
     @Test
     @MethodOwner(owner = "Olena Babii")
-    public void test(){
-        MerchMainPage merchMainPage = new MerchMainPage(getDriver());
-        merchMainPage.openURL("https://merch.gsmarena.com/collections/all");
+    public void testSmoke(){
+        HomePage homePage = new HomePage(getDriver());
+        homePage.open();
+        MerchMainPage merchMainPage = homePage.getHeaderMenu().openMerchPage();
+        Assert.assertEquals(getDriver().getCurrentUrl(),
+                "https://merch.gsmarena.com/", "Merch page wasn't open!");
+        CameraIslandsTeePage tShirtPage = merchMainPage.clickCameraIslandsTee();
+        Assert.assertEquals(getDriver().getCurrentUrl(),
+                "https://merch.gsmarena.com/products/camera-islands-tee-on-dark",
+                "T-Shirt Page was not open!");
+        tShirtPage.getAddToCartButton().scrollTo();
+        tShirtPage.chooseColorBlack().chooseXS().chooseCustomCount("12");
+        tShirtPage.getAddToCartButton().click();
+        ProductDrawer productDrawer = tShirtPage.getProductDrawer();
+        Assert.assertTrue(productDrawer.isUIObjectPresent(), "Product drawer is not present!");
+        productDrawer.getCloseProductDrawerButton().click();
+        CartPage cartPage = tShirtPage.getHeaderMerchMenu().openCartPage();
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertEquals(cartPage.getCartItemsTitles().get(0).getTitleItem().getText(),
+                "CAMERA ISLANDS TEE (ON DARK)", "No required item in cart!");
+        softAssert.assertEquals(cartPage.getCartItemsTitles().get(0).getQuantityField().getAttribute("value"),
+                "12", "Wrong quantity!");
+        softAssert.assertEquals(cartPage.getCartItemsTitles().get(0).getChoicesInfo().getText(),
+                "BLACK, XS", "Wrong parameters!");
+        softAssert.assertAll();
     }
 
 
