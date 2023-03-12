@@ -49,6 +49,9 @@ public class HeaderMenu extends AbstractUIObject {
     @FindBy(xpath = "//div[@id='social-connect']//a[contains(@href, 'logout')]")
     private ExtendedWebElement logOutLink;
 
+    @FindBy(xpath = "//div[@id='social-connect']//a[contains(@href, 'merch')]")
+    private ExtendedWebElement merchPageLink;
+
     @FindBy(xpath = "//ul[@id='menu']//a")
     private List<ExtendedWebElement> buttons;
 
@@ -102,39 +105,16 @@ public class HeaderMenu extends AbstractUIObject {
         return new RegisterPage(driver);
     }
 
-
-    public String getNeededYoutubeLink() {
-        String youtubeHref = youtubeLink.getAttribute("href");
-        int i = youtubeHref.indexOf('?');
-        youtubeHref = youtubeHref.replace(youtubeHref.substring(i), "");
-        return youtubeHref;
+    public MerchMainPage openMerchPage(){
+        merchPageLink.click();
+        List<String> openTabs = new ArrayList<>(driver.getWindowHandles());
+        driver.switchTo().window(openTabs.get(openTabs.size() - 1));
+        return new MerchMainPage(driver);
     }
 
     public ExtendedWebElement getLogOutLink() {
         return logOutLink;
     }
-
-    /*public boolean checkAllButtons() {
-        HomePage homePage = openHomePage();
-        if(!home.getAttribute("href").equals(homePage.getCurrentUrl()))
-            return false;
-        TipUsPage tipUsPage = openTipUsPage();
-        if(!tipLink.getAttribute("href").equals(tipUsPage.getCurrentUrl()))
-            return false;
-        String neededLink = getNeededYoutubeLink();
-        YoutubePage youtube = openYouTubeLink();
-        if(!youtube.getCurrentUrl().equals(neededLink) || !youtube.isSubscribeWindowPresent())
-            return false;
-        navigateBack();
-        LoginPopUp loginPopUp = openLoginPopUp();
-        if (!loginPopUp.isUIObjectPresent())
-            return false;
-        RegisterPage registerPage = openRegisterPage();
-        if(!registerLink.getAttribute("href").equals(registerPage.getCurrentUrl()))
-            return false;
-        RSSFeedPage rssFeedPage = openRSSFeed();
-        return rssFeedLink.getAttribute("href").equals(rssFeedPage.getCurrentUrl());
-    }*/
 
     public void clickMenuButton(HeaderButton headerButton) {
         buttons.get(headerButton.getValue()).click();

@@ -6,16 +6,15 @@ import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
-public class ProductTile extends AbstractUIObject {
+public class ProductDrawer extends AbstractUIObject {
+    @FindBy(xpath = "//a[@class='product-drawer__close']")
+    private ExtendedWebElement closeProductDrawerButton;
 
-    @FindBy(xpath = ".//div[@class='tile__overlay-button']//button")
-    private ExtendedWebElement seeMoreButton;
-
-    public ProductTile(WebDriver driver, SearchContext searchContext) {
+    public ProductDrawer(WebDriver driver, SearchContext searchContext) {
         super(driver, searchContext);
     }
 
-    public ExtendedWebElement getSeeMoreButton() {
-        return seeMoreButton;
+    public ExtendedWebElement getCloseProductDrawerButton() {
+        return closeProductDrawerButton;
     }
 }
