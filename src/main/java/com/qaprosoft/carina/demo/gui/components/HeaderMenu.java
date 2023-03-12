@@ -119,4 +119,17 @@ public class HeaderMenu extends AbstractUIObject {
     public void clickMenuButton(HeaderButton headerButton) {
         buttons.get(headerButton.getValue()).click();
     }
+
+    public HeaderMenu switchToMerchPage(){
+        List<String> windowsHandlers = new ArrayList<>(driver.getWindowHandles());
+        driver.switchTo().window(windowsHandlers.get(1));
+        return this;
+    }
+
+    public MerchMainPage openMerchMainPage(){
+        openHeaderMenu();
+        buttons.get(7).click();
+        switchToMerchPage();
+        return new MerchMainPage(driver);
+    }
 }

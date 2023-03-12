@@ -5,6 +5,10 @@ import com.qaprosoft.carina.core.gui.AbstractUIObject;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class ProductTile extends AbstractUIObject {
 
@@ -18,4 +22,7 @@ public class ProductTile extends AbstractUIObject {
     public ExtendedWebElement getSeeMoreButton() {
         return seeMoreButton;
     }
+
+
+
 }

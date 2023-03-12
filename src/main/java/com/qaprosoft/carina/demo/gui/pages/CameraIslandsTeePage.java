@@ -4,12 +4,17 @@ import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebEleme
 import com.qaprosoft.carina.core.gui.AbstractPage;
 import com.qaprosoft.carina.demo.gui.components.HeaderMerchMenu;
 import com.qaprosoft.carina.demo.gui.components.ProductDrawer;
+import com.qaprosoft.carina.demo.gui.components.ProductInfo;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
 public class CameraIslandsTeePage extends AbstractPage {
+
+    @FindBy(xpath = "//div[@class=\"grid__column grid__column--12 grid__column--5@sm\"]")
+    private ProductInfo productInfo;
+
     @FindBy(xpath = "//label[@title='Black']")
     private ExtendedWebElement blackColorLabel;
 
@@ -36,6 +41,10 @@ public class CameraIslandsTeePage extends AbstractPage {
 
     public CameraIslandsTeePage(WebDriver driver) {
         super(driver);
+    }
+
+    public ProductInfo getProductInfo() {
+        return productInfo;
     }
 
     public CameraIslandsTeePage chooseColorBlack(){
