@@ -13,7 +13,7 @@ public class CartItem extends AbstractUIObject {
     @FindBy(xpath = ".//p[@class='cart-item__variant-title']")
     private ExtendedWebElement choicesInfo;
 
-    @FindBy(xpath = "//a[@class='cart-item__title']")
+    @FindBy(xpath = ".//a[@class='cart-item__title']")
     private ExtendedWebElement titleItem;
 
     public CartItem(WebDriver driver, SearchContext searchContext) {
