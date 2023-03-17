@@ -14,7 +14,7 @@ import java.util.List;
 public class HeaderMenu extends AbstractUIObject {
     @FindBy(xpath = "//header//a[not(contains(@class, 'more-news-link more-news-link-small'))]" +
             "[not(contains(@class, 'forgot'))][not(contains(@class, 'go'))][not(contains(@class, 'advanced'))]")
-    private List<ExtendedWebElement> brandLinks;
+    private List<ExtendedWebElement> headerButtons;
 
     @FindBy(xpath = "//span[@class='lines']")
     private ExtendedWebElement headerMenuButton;
@@ -55,6 +55,9 @@ public class HeaderMenu extends AbstractUIObject {
     @FindBy(xpath = "//ul[@id='menu']//a")
     private List<ExtendedWebElement> buttons;
 
+    @FindBy(xpath = "//ul[@id='menu']//a[@href='news.php3']")
+    private ExtendedWebElement newsPageButton;
+
     public HeaderMenu(WebDriver driver, SearchContext searchContext) {
         super(driver, searchContext);
     }
@@ -68,8 +71,9 @@ public class HeaderMenu extends AbstractUIObject {
         return allElementsPresent(webElements);
     }
 
-    public void openHeaderMenu(){
+    public HeaderMenu openHeaderMenu(){
         headerMenuButton.click();
+        return this;
     }
 
     public HomePage openHomePage() {
@@ -110,6 +114,17 @@ public class HeaderMenu extends AbstractUIObject {
         List<String> openTabs = new ArrayList<>(driver.getWindowHandles());
         driver.switchTo().window(openTabs.get(openTabs.size() - 1));
         return new MerchMainPage(driver);
+    }
+
+    public NewsPage openNewsPage(){
+        openHeaderMenu();
+        newsPageButton.click();
+        return new NewsPage(driver);
+    }
+
+    public DailyDealsPage openDealsPage(){
+        buttons.get(6).click();
+        return new DailyDealsPage(driver);
     }
 
     public ExtendedWebElement getLogOutLink() {

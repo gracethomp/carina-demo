@@ -16,8 +16,8 @@
 package com.qaprosoft.carina.demo.gui.components;
 
 import org.openqa.selenium.SearchContext;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.WebDriver;
 
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.qaprosoft.carina.core.gui.AbstractUIObject;
@@ -33,5 +33,9 @@ public class NewsItem extends AbstractUIObject {
     
     public String readTitle() {
         return titleLink.getElement().getText();
+    }
+
+    public ExtendedWebElement getTitleLink() {
+        return titleLink;
     }
 }

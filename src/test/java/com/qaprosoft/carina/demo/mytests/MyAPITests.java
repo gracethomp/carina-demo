@@ -21,7 +21,7 @@ public class MyAPITests implements IAbstractTest {
     @MethodOwner(owner = "Olena Babii")
     public void testGetStatus() {
         GetStatusMethod getStatusMethod = new GetStatusMethod();
-        getStatusMethod.callAPI();
+        getStatusMethod.callAPI().toString();
         getStatusMethod.validateResponse(JSONCompareMode.STRICT, JsonCompareKeywords.ARRAY_CONTAINS.getKey());
     }
 

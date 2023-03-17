@@ -15,6 +15,7 @@
  */
 package com.qaprosoft.carina.demo.gui.pages;
 
+import java.lang.invoke.MethodHandles;
 import java.util.List;
 
 import org.openqa.selenium.WebDriver;
@@ -23,9 +24,11 @@ import org.openqa.selenium.support.FindBy;
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.qaprosoft.carina.core.gui.AbstractPage;
 import com.qaprosoft.carina.demo.gui.components.NewsItem;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class NewsPage extends AbstractPage {
-    
+    private static final Logger LOGGER = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
     @FindBy(className="searchFor")
     private ExtendedWebElement searchTextField;
     
@@ -48,6 +51,11 @@ public class NewsPage extends AbstractPage {
         searchTextField.type(q);
         searchButton.click();
         return news;
+    }
+
+    public ArticlePage openArticle(int index){
+        news.get(index).getTitleLink().click();
+        return new ArticlePage(driver);
     }
 
     public boolean isOpen(){

@@ -1,7 +1,7 @@
 package com.qaprosoft.carina.demo.gui.enums;
 
 public enum HeaderButton {
-    HOME(0), NEWS(1), REVIEWS(2), VIDEOS(3);
+    HOME(0), NEWS(1), REVIEWS(2), VIDEOS(3), DEALS(6);
 
     private final int value;
 

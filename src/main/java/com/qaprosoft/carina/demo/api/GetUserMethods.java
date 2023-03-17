@@ -27,7 +27,6 @@ import com.zebrunner.carina.utils.Configuration;
 @ResponseTemplatePath(path = "api/users/_get/rs.json")
 @SuccessfulHttpStatus(status = HttpResponseStatusType.OK_200)
 public class GetUserMethods extends AbstractApiMethodV2 {
-
     public GetUserMethods() {
         replaceUrlPlaceholder("base_url", Configuration.getEnvArg("api_url"));
     }

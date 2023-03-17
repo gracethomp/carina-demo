@@ -170,6 +170,4 @@ public class MyWebTests implements IAbstractTest  {
                 "BLACK, XS", "Wrong parameters!");
         softAssert.assertAll();
     }
-
-
 }
