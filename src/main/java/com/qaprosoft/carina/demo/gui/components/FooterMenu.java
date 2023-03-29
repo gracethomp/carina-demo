@@ -19,6 +19,10 @@ import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebEleme
 import com.qaprosoft.carina.core.gui.AbstractUIObject;
 import com.qaprosoft.carina.demo.gui.enums.FooterButton;
 import com.qaprosoft.carina.demo.gui.pages.*;
+import com.qaprosoft.carina.demo.gui.pages.gsmarena.CompareModelsPage;
+import com.qaprosoft.carina.demo.gui.pages.gsmarena.GlossaryPage;
+import com.qaprosoft.carina.demo.gui.pages.gsmarena.NetworkCoveragePage;
+import com.qaprosoft.carina.demo.gui.pages.gsmarena.NewsPage;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;

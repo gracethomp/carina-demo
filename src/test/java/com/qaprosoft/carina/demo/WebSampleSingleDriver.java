@@ -28,7 +28,7 @@ import com.zebrunner.carina.core.registrar.ownership.MethodOwner;
 import com.qaprosoft.carina.demo.gui.components.FooterMenu;
 import com.qaprosoft.carina.demo.gui.components.compare.ModelSpecs;
 import com.qaprosoft.carina.demo.gui.components.compare.ModelSpecs.SpecType;
-import com.qaprosoft.carina.demo.gui.pages.CompareModelsPage;
+import com.qaprosoft.carina.demo.gui.pages.gsmarena.CompareModelsPage;
 import com.qaprosoft.carina.demo.gui.pages.HomePage;
 
 /**

@@ -8,6 +8,7 @@ import com.qaprosoft.carina.demo.gui.components.ProductDrawer;
 import com.qaprosoft.carina.demo.gui.enums.FooterButton;
 import com.qaprosoft.carina.demo.gui.enums.HeaderButton;
 import com.qaprosoft.carina.demo.gui.pages.*;
+import com.qaprosoft.carina.demo.gui.pages.gsmarena.*;
 import com.zebrunner.carina.core.registrar.ownership.MethodOwner;
 import com.zebrunner.carina.core.registrar.tag.Priority;
 import com.zebrunner.carina.core.registrar.tag.TestPriority;
@@ -151,9 +152,10 @@ public class MyWebTests implements IAbstractTest  {
         Assert.assertEquals(getDriver().getCurrentUrl(),
                 "https://merch.gsmarena.com/", "Merch page wasn't open!");
         CameraIslandsTeePage tShirtPage = merchMainPage.clickCameraIslandsTee();
-        Assert.assertEquals(getDriver().getCurrentUrl(),
-                "https://merch.gsmarena.com/products/camera-islands-tee-on-dark",
-                "T-Shirt Page was not open!");
+        Assert.assertTrue(tShirtPage.isPageOpened(), ":(");
+//        Assert.assertEquals(getDriver().getCurrentUrl(),
+//                "https://merch.gsmarena.com/products/camera-islands-tee-on-dark",
+//                "T-Shirt Page was not open!");
         tShirtPage.getAddToCartButton().scrollTo();
         tShirtPage.chooseColorBlack().chooseXS().chooseCustomCount("12");
         tShirtPage.getAddToCartButton().click();

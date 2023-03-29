@@ -2,10 +2,9 @@ package com.qaprosoft.carina.demo.mytests;
 
 import com.qaprosoft.carina.core.foundation.IAbstractTest;
 import com.qaprosoft.carina.demo.gui.components.ProductInfo;
-import com.qaprosoft.carina.demo.gui.pages.CameraIslandsTeePage;
+import com.qaprosoft.carina.demo.gui.pages.gsmarena.CameraIslandsTeePage;
 import com.qaprosoft.carina.demo.gui.pages.HomePage;
 import com.zebrunner.carina.core.registrar.ownership.MethodOwner;
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 

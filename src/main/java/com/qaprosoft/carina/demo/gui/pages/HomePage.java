@@ -20,6 +20,8 @@ import com.qaprosoft.carina.core.gui.AbstractPage;
 import com.qaprosoft.carina.demo.gui.components.FooterMenu;
 import com.qaprosoft.carina.demo.gui.components.HeaderMenu;
 import com.qaprosoft.carina.demo.gui.components.WeValuePrivacyAd;
+import com.qaprosoft.carina.demo.gui.pages.gsmarena.BrandModelsPage;
+import com.qaprosoft.carina.demo.gui.pages.gsmarena.ModelReviewPage;
 import com.zebrunner.carina.utils.Configuration;
 import com.zebrunner.carina.utils.R;
 import org.openqa.selenium.JavascriptExecutor;

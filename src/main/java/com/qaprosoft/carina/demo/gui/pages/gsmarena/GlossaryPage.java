@@ -1,4 +1,4 @@
-package com.qaprosoft.carina.demo.gui.pages;
+package com.qaprosoft.carina.demo.gui.pages.gsmarena;
 
 import com.qaprosoft.carina.core.gui.AbstractPage;
 import org.openqa.selenium.WebDriver;

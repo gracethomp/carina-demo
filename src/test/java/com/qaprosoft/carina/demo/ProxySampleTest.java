@@ -21,7 +21,7 @@ import com.qaprosoft.carina.core.foundation.IAbstractTest;
 import com.qaprosoft.carina.core.foundation.webdriver.Screenshot;
 import com.qaprosoft.carina.core.foundation.webdriver.ScreenshotType;
 import com.qaprosoft.carina.demo.gui.pages.HomePage;
-import com.qaprosoft.carina.demo.gui.pages.NewsPage;
+import com.qaprosoft.carina.demo.gui.pages.gsmarena.NewsPage;
 import com.qaprosoft.carina.demo.proxy.CustomProxy;
 import com.qaprosoft.carina.demo.proxy.CustomProxyRule;
 import com.qaprosoft.carina.demo.proxy.DemoResponseFilter;

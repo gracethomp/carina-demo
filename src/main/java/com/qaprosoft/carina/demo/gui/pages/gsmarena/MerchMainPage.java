@@ -1,4 +1,4 @@
-package com.qaprosoft.carina.demo.gui.pages;
+package com.qaprosoft.carina.demo.gui.pages.gsmarena;
 
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.qaprosoft.carina.core.gui.AbstractPage;
@@ -17,6 +17,7 @@ public class MerchMainPage extends AbstractPage {
 
     public MerchMainPage(WebDriver driver) {
         super(driver);
+        setUiLoadedMarker(cameraIslandsTeeTShirt);
     }
 
     public List<ProductTile> getProductTiles() {

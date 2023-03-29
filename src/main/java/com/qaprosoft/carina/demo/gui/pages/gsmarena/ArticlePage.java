@@ -1,4 +1,4 @@
-package com.qaprosoft.carina.demo.gui.pages;
+package com.qaprosoft.carina.demo.gui.pages.gsmarena;
 
 import java.util.ArrayList;
 import java.time.format.DateTimeFormatter;

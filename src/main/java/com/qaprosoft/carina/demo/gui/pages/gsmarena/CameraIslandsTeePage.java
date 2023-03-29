@@ -1,6 +1,7 @@
-package com.qaprosoft.carina.demo.gui.pages;
+package com.qaprosoft.carina.demo.gui.pages.gsmarena;
 
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
+import com.qaprosoft.carina.core.foundation.webdriver.decorator.PageOpeningStrategy;
 import com.qaprosoft.carina.core.gui.AbstractPage;
 import com.qaprosoft.carina.demo.gui.components.HeaderMerchMenu;
 import com.qaprosoft.carina.demo.gui.components.ProductDrawer;
@@ -41,6 +42,8 @@ public class CameraIslandsTeePage extends AbstractPage {
 
     public CameraIslandsTeePage(WebDriver driver) {
         super(driver);
+        setPageOpeningStrategy(PageOpeningStrategy.BY_ELEMENT);
+        setUiLoadedMarker(addToCartButton);
     }
 
     public ProductInfo getProductInfo() {
@@ -80,3 +83,5 @@ public class CameraIslandsTeePage extends AbstractPage {
         return headerMerchMenu;
     }
 }
+
+//java -jar -Dwebdriver.chrome.driver=./chromedriver selenium-server-standalone-3.141.59.jar

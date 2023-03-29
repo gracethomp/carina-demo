@@ -2,7 +2,7 @@ package com.qaprosoft.carina.demo.mytests;
 
 import com.qaprosoft.carina.core.foundation.IAbstractTest;
 import com.qaprosoft.carina.demo.gui.components.PriceCut;
-import com.qaprosoft.carina.demo.gui.pages.DailyDealsPage;
+import com.qaprosoft.carina.demo.gui.pages.gsmarena.DailyDealsPage;
 import com.qaprosoft.carina.demo.gui.pages.HomePage;
 import com.zebrunner.carina.core.registrar.ownership.MethodOwner;
 import com.zebrunner.carina.core.registrar.tag.Priority;

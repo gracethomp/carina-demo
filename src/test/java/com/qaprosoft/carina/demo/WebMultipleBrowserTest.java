@@ -22,7 +22,7 @@ import com.qaprosoft.carina.core.foundation.webdriver.core.capability.impl.deskt
 import com.qaprosoft.carina.core.foundation.webdriver.core.capability.impl.desktop.FirefoxCapabilities;
 import com.qaprosoft.carina.demo.gui.components.NewsItem;
 import com.qaprosoft.carina.demo.gui.pages.HomePage;
-import com.qaprosoft.carina.demo.gui.pages.NewsPage;
+import com.qaprosoft.carina.demo.gui.pages.gsmarena.NewsPage;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.testng.Assert;

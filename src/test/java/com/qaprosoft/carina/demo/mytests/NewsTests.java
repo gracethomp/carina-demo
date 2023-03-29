@@ -7,9 +7,9 @@ import org.testng.Assert;
 
 import com.qaprosoft.carina.core.foundation.IAbstractTest;
 import com.zebrunner.carina.core.registrar.ownership.MethodOwner;
-import com.qaprosoft.carina.demo.gui.pages.ArticlePage;
+import com.qaprosoft.carina.demo.gui.pages.gsmarena.ArticlePage;
 import com.qaprosoft.carina.demo.gui.pages.HomePage;
-import com.qaprosoft.carina.demo.gui.pages.NewsPage;
+import com.qaprosoft.carina.demo.gui.pages.gsmarena.NewsPage;
 
 public class NewsTests implements IAbstractTest {
     @Test()

@@ -4,6 +4,7 @@ import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebEleme
 import com.qaprosoft.carina.core.gui.AbstractUIObject;
 import com.qaprosoft.carina.demo.gui.enums.HeaderButton;
 import com.qaprosoft.carina.demo.gui.pages.*;
+import com.qaprosoft.carina.demo.gui.pages.gsmarena.*;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
