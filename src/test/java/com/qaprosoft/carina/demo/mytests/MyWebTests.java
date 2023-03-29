@@ -19,6 +19,7 @@ import org.testng.asserts.SoftAssert;
 import java.util.Random;
 
 public class MyWebTests implements IAbstractTest  {
+
     @Test()
     @MethodOwner(owner = "Olena Babii")
     @TestPriority(Priority.P1)
